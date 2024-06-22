@@ -1,0 +1,100 @@
+<form #stdForm="ngForm" (ngSubmit)="onStdAdd()">
+    <div class="form-group" >
+        <label for="fname">First Name <sup class="text-danger font-bold">*</sup> </label>
+        <input type="text"
+         class="form-control"
+          required 
+          pattern="[a-zA-Z]+"
+          minlength="3"
+          ngModel 
+          #fname="ngModel"
+           name="fname" 
+           id="fname">
+        <span class="text-danger" *ngIf="fname.touched && fname.hasError('required')">
+            First name is mandatory !
+        </span>
+        <ng-container *ngIf="fname.dirty">
+            <span class="text-danger" *ngIf="fname.hasError('pattern')">
+                first name should not include numbers and special charectors!
+            </span>
+            <span class="text-danger" *ngIf="fname.hasError('minlength')">
+                minimum length of first name should be {{fname.errors?.['minlength'].requiredLength}} And the actual length is {{fname.errors?.['minlength'].actualLength}}
+            </span>
+        </ng-container>
+    </div>
+
+    <div class="form-group">
+        <label for="lname">Lirst Name <sup class="text-danger">*</sup></label>
+        <input type="text"
+         class="form-control"
+          required 
+          pattern="[a-zA-Z]+"
+          minlength="3"
+          ngModel 
+          #lname="ngModel"
+           name="lname" 
+           id="lname">
+        <span class=" text-danger" *ngIf="lname.touched && lname.hasError('required')">
+            Last name is mandatory !
+        </span>
+        <ng-container *ngIf="lname.dirty">
+            <span class=" text-danger" *ngIf="lname.hasError('pattern')">
+                last name should not include numbers and special charectors!
+            </span>
+            <span class=" text-danger" *ngIf="lname.hasError('minlength')">
+                minimum length of last name should be {{lname.errors?.['minlength'].requiredLength}} And the actual length is {{lname.errors?.['minlength'].actualLength}}
+            </span>
+        </ng-container>
+    </div>
+    
+
+    <div class="form-group">
+        <label for="email">Email<sup class="text-danger">*</sup></label>
+        <input type="text"
+         class="form-control"
+          required 
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          ngModel 
+          #email="ngModel"
+           name="email" 
+           id="email">
+        <span class=" text-danger" *ngIf="email.touched && email.hasError('required')">
+            Email name is mandatory !
+        </span>
+        <ng-container *ngIf="email.dirty">
+            <span class=" text-danger" *ngIf="email.hasError('pattern')">
+                Email Pattern is not correct!
+            </span>
+            
+        </ng-container>
+    </div>
+
+    <div class="form-group">
+        <label for="contact">Contact<sup class="text-danger">*</sup></label>
+        <input type="text"
+         class="form-control"
+          required 
+          pattern="^\d*$"
+          minlength="10"
+          maxlength="10"
+          ngModel 
+          #contact="ngModel"
+           name="contact" 
+           id="contact">
+        <span class=" text-danger" *ngIf="contact.touched && contact.hasError('required')">
+            contact number is mandatory !
+        </span>
+        <ng-container *ngIf="contact.dirty">
+            <span class=" text-danger" *ngIf="contact.hasError('pattern')">
+                contact Pattern is not correct!
+            </span>
+            
+            <span class=" text-danger" *ngIf="contact.hasError('minlength') || contact.hasError('maxlength') ">
+               contact nember should contain 10 number
+            </span>
+        </ng-container>
+    </div>
+    <button class="btn btn-info btn-sm btn-block">
+        Add Student
+    </button>
+</form>
